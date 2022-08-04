@@ -130,8 +130,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
       // to the current petition.
       foreach($emailAddress as $e) {
         if($e['EmailAddress']['co_person_id'] != $coPersonId && $e['EmailAddress']['org_identity_id'] != $orgIdentityId) {
-          // TODO Replace with proper redirect.
-          $this->redirect("https://www.google.com");
+          $this->redirect("https://identity.access-ci.org/email-exists");
         }
       }
     }
