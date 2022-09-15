@@ -7,7 +7,7 @@
 ?>
 
 <p>
-Please set a password for your new ACCESS ID <?php print $vv_access_id; ?>?
+Please set a password for your new ACCESS ID <?php print $vv_access_id; ?>
 </p>
 
 <?php
