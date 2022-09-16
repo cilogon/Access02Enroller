@@ -130,6 +130,10 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
       // to the current petition.
       foreach($emailAddress as $e) {
         if($e['EmailAddress']['co_person_id'] != $coPersonId && $e['EmailAddress']['org_identity_id'] != $orgIdentityId) {
+          $msg = "Redirecting non-federated enrollment with email address " . $e['EmailAddress']['mail'];
+          $msg = $msg . " and CO Person ID " . $e['EmailAddress']['co_person_id'];
+          $msg = $msg . " stopping work on new CO Person ID $coPersonId";
+          $this->log($msg);
           $this->redirect("https://identity.access-ci.org/email-exists");
         }
       }
