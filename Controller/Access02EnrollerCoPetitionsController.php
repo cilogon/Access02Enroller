@@ -31,11 +31,14 @@ App::uses('CoPetitionsController', 'Controller');
 App::uses('HtmlHelper', 'View/Helper');
 App::uses('Krb', 'KrbAuthenticator.Model');
 App::uses('KrbAuthenticator', 'KrbAuthenticator.Model');
- 
+
 class Access02EnrollerCoPetitionsController extends CoPetitionsController {
   // Class name, used by Cake
   public $name = "Access02EnrollerCoPetitions";
-  public $uses = array("CoPetition");
+  public $uses = array(
+    "CoPetition",
+    "AttributeEnumeration"
+  );
 
   /**
    * Plugin functionality following finalize step
@@ -94,7 +97,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
    * @param Integer $id CO Petition ID
    * @param Array $onFinish URL, in Cake format
    */
-   
+
   protected function execute_plugin_petitionerAttributes($id, $onFinish) {
     $args = array();
     $args['conditions']['CoPetition.id'] = $id;
@@ -149,7 +152,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
       $this->Session->write('access02.plugin.petitionerAttributes.onFinish', $onFinish);
     }
 
-    // Create an instance of the AccessOrganization model since we do 
+    // Create an instance of the AccessOrganization model since we do
     // not have a direct relationship with it.
     $accessOrganizationModel = new AccessOrganization();
 
@@ -210,7 +213,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
       // Done processing all POST data so redirect to continue enrollment flow.
       $this->redirect($onFinish);
     } // End of POST.
-    
+
     // GET fall through to fiew.
   }
 
@@ -220,7 +223,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
    * @param Integer $id CO Petition ID
    * @param Array $onFinish URL, in Cake format
    */
-   
+
   protected function execute_plugin_provision($id, $onFinish) {
     $args = array();
     $args['conditions']['CoPetition.id'] = $id;
@@ -287,7 +290,7 @@ class Access02EnrollerCoPetitionsController extends CoPetitionsController {
         $this->Flash->set($e->getMessage(), array('key' => 'error'));
       }
     } // POST
-    
+
     // GET fall through to view.
   }
 
